@@ -5,10 +5,6 @@
             {
                 "appID": "RYA3R8S93A.com.chinasie.ssq",
                 "paths": [ "/ssq/*" ]
-            },
-            {
-                "appID": "S3RXM64H74.com.vivo.it.v-college-dev",
-                "paths": [ "/vCollegeDev/*" ]
             }
         ]
     }
