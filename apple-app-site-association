@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "RYA3R8S93A.com.chinasie.ssq",
+                "paths": [ "/ssq/*" ]
+            }
+        ]
+    }
+}
