@@ -9,3 +9,7 @@
 
 #### unc0ver下载 
 [点击下载](itms-services://?action=download-manifest&url=https://1987zcc.github.io/unc0ver/manifest.plist)
+
+
+#### app Test下载 
+[点击下载](itms-services://?action=download-manifest&url=https://1987zcc.github.io/vcollege/manifest.plist)
