@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_demo_2023"]=self["webpackChunkvue_demo_2023"]||[]).push([[569],{569:function(e,n,u){u.r(n),u.d(n,{default:function(){return c}});var t=function(){var e=this,n=e._self._c;return n("div",[n("router-link",{attrs:{to:{name:"IndexDemo"}}},[e._v("查看DEMO")])],1)},r=[],a={},l=a,o=u(1001),s=(0,o.Z)(l,t,r,!1,null,"7de6a50a",null),c=s.exports}}]);
+//# sourceMappingURL=569.d839a06d.js.map
