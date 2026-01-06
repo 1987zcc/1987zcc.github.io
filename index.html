@@ -1,11 +1,368 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>贰贰乐铺 - 我的个人作品集</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+        }
+
+        /* 全局变量（方便统一调整风格） */
+        :root {
+            --primary-color: #6a8caf; /* 主色调（清新蓝） */
+            --secondary-color: #f7c873; /* 辅助色（暖黄） */
+            --text-dark: #2d3436;
+            --text-gray: #636e72;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 个人简介Banner */
+        .banner {
+            padding: 6rem 5%;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .avatar {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .avatar img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .intro {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .intro h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .intro h1 span {
+            color: var(--primary-color);
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .intro .tag {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 20px;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        /* 作品展示区 */
+        .works {
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto;
+        }
+
+        .work-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .work-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .work-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .work-info {
+            padding: 1.8rem;
+        }
+
+        .work-info h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .work-info .work-type {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .work-info p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-info a {
+            text-decoration: none;
+            color: var(--white);
+            background-color: var(--secondary-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .work-info a:hover {
+            background-color: #e9b75e;
+        }
+
+        /* 关于我区域 */
+        .about {
+            padding: 6rem 5%;
+            background-color: var(--bg-light);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-text {
+            color: #b2bec3;
+            margin-bottom: 1.5rem;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #747d8c;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .banner {
+                padding: 4rem 5%;
+                gap: 2rem;
+            }
+
+            .intro h1 {
+                font-size: 2rem;
+            }
+
+            .works {
+                padding: 4rem 5%;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    is working
+    <!-- 导航栏 -->
+    <nav>
+        <a href="#" class="logo">贰贰<span>乐铺</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#works">作品展示</a></li>
+            <li><a href="#about">关于我</a></li>
+        </ul>
+    </nav>
+
+    <!-- 个人简介Banner -->
+    <section class="banner" id="home">
+        <div class="avatar">
+            <img src="https://picsum.photos/400/400?random=1" alt="个人头像">
+        </div>
+        <div class="intro">
+            <h1>你好，我是<span>贰贰乐铺</span>的创作者</h1>
+            <p>热爱设计/开发/创作（可根据你的领域修改），专注于打造有温度、有创意的作品，用细节和用心诠释每一个创作想法。</p>
+            <div class="tag">UI设计</div>
+            <div class="tag">网页开发</div>
+            <div class="tag">创意策划</div>
+        </div>
+    </section>
+
+    <!-- 作品展示区 -->
+    <section class="works" id="works">
+        <h2 class="section-title">我的作品</h2>
+        <div class="work-list">
+            <!-- 作品卡片1 -->
+            <div class="work-card">
+                <img src="https://picsum.photos/800/500?random=2" alt="作品1" class="work-img">
+                <div class="work-info">
+                    <h3>简约电商网页设计</h3>
+                    <span class="work-type">网页设计 / 2025</span>
+                    <p>基于用户体验优化的电商首页设计，采用极简风格，突出商品展示，提升转化效率。</p>
+                    <a href="#">查看详情</a>
+                </div>
+            </div>
+            <!-- 作品卡片2 -->
+            <div class="work-card">
+                <img src="https://picsum.photos/800/500?random=3" alt="作品2" class="work-img">
+                <div class="work-info">
+                    <h3>移动端APP界面设计</h3>
+                    <span class="work-type">UI设计 / 2025</span>
+                    <p>生活类APP的全套界面设计，包含首页、分类、个人中心等核心页面，适配多尺寸屏幕。</p>
+                    <a href="#">查看详情</a>
+                </div>
+            </div>
+            <!-- 作品卡片3 -->
+            <div class="work-card">
+                <img src="https://picsum.photos/800/500?random=4" alt="作品3" class="work-img">
+                <div class="work-info">
+                    <h3>个人博客网站开发</h3>
+                    <span class="work-type">前端开发 / 2024</span>
+                    <p>基于HTML+CSS+JavaScript开发的响应式个人博客，支持文章分类、标签筛选等功能。</p>
+                    <a href="#">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>关于贰贰乐铺</h2>
+            <p>“贰贰乐铺”是我的个人创作小站，“贰贰”代表着双倍的用心、双倍的热爱，“乐铺”则是希望把创作当成一件快乐的事，用心打磨每一个作品，分享每一份创作的喜悦。</p>
+            <p>我擅长网页设计、前端开发、UI设计等领域（可替换为你的擅长领域），始终坚持“简约而不简单”的创作理念，注重用户体验和视觉美感的平衡。</p>
+            <p>如果你喜欢我的作品，或者有合作意向，欢迎随时联系我～</p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-logo">贰贰乐铺 22lp.com</div>
+        <div class="footer-text">用心创作，快乐分享</div>
+        <div class="copyright">© 2026 贰贰乐铺 版权所有</div>
+    </footer>
 </body>
 </html>
