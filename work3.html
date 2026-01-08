@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贰贰乐铺 - 我的个人作品集</title>
+    <title>个人博客网站开发 - 贰贰乐铺</title>
     <style>
         /* 全局样式重置 */
         * {
@@ -110,178 +110,175 @@
             padding: 0.3rem 0.5rem;
         }
 
-        /* 个人简介Banner */
-        .banner {
-            padding: 5.5rem 5% 6rem;
-            background: radial-gradient(circle at top left, rgba(247, 200, 115, 0.18), transparent 55%),
-                        radial-gradient(circle at bottom right, rgba(106, 140, 175, 0.18), transparent 55%);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4rem;
+
+        /* 作品详情页样式 */
+        .work-detail {
+            padding: 5rem 5% 6rem;
         }
 
-        .avatar {
-            flex: 1;
-            min-width: 280px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-header {
             text-align: center;
+            margin-bottom: 3.5rem;
         }
 
-        .avatar img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid var(--white);
-            box-shadow: var(--shadow);
-        }
-
-        .intro {
-            flex: 2;
-            min-width: 280px;
-        }
-
-        .intro h1 {
-            font-size: 2.5rem;
+        .work-header h1 {
+            font-size: 2.4rem;
             color: var(--text-dark);
             margin-bottom: 1rem;
             letter-spacing: 0.06em;
         }
 
-        .intro h1 span {
+        .work-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .work-meta-item {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        .work-meta-item strong {
             color: var(--primary-color);
         }
 
-        .intro p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 2rem;
+        .work-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .intro .tag {
+        .work-tag {
             display: inline-block;
             padding: 0.5rem 1.2rem;
             background-color: var(--primary-color);
             color: var(--white);
             border-radius: 20px;
-            margin-right: 0.8rem;
-            margin-bottom: 0.8rem;
             font-size: 0.9rem;
-            box-shadow: var(--shadow);
         }
 
-        /* 作品展示区 */
-        .works {
-            padding: 6rem 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--text-dark);
+        .work-gallery {
             margin-bottom: 4rem;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            margin: 1rem auto;
-        }
-
-        .work-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .work-card {
-            background-color: var(--white);
+        .main-image {
+            width: 100%;
+            height: auto;
             border-radius: 16px;
-            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            object-fit: cover;
+        }
+
+        .sub-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .sub-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
             box-shadow: var(--shadow);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .work-card:hover {
-            transform: translateY(-8px);
+        .sub-image:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
 
-        .work-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
+        .work-description {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2.6rem 3rem;
+            border-radius: 18px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
         }
 
-        .work-info {
-            padding: 1.8rem;
-        }
-
-        .work-info h3 {
+        .work-description h2 {
             color: var(--text-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-description p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-features {
+            margin-bottom: 4rem;
+        }
+
+        .work-features h2 {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
             font-size: 1.3rem;
             margin-bottom: 1rem;
         }
 
-        .work-info .work-type {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .work-info p {
+        .feature-item p {
             color: var(--text-gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
-        .work-info a {
+        .back-button {
+            display: inline-block;
             text-decoration: none;
             color: var(--text-dark);
             background: linear-gradient(135deg, #f7c873, #fbd38d);
-            padding: 0.6rem 1.7rem;
+            padding: 0.85rem 2.2rem;
             border-radius: 999px;
-            font-size: 0.9rem;
+            font-size: 0.98rem;
             font-weight: 500;
             box-shadow: var(--shadow);
             transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+            margin-top: 2rem;
         }
 
-        .work-info a:hover {
+        .back-button:hover {
             filter: brightness(1.03);
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-        }
-
-        /* 关于我区域 */
-        .about {
-            padding: 6rem 5%;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content h2 {
-            font-size: 2rem;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-        }
-
-        .about-content p {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            text-align: left;
         }
 
         /* 页脚样式 */
@@ -343,22 +340,30 @@
                 padding: 0.5rem 0.8rem;
             }
 
-            .banner {
+            .work-detail {
                 padding: 4rem 5%;
-                gap: 2rem;
             }
 
-            .intro h1 {
+            .work-header h1 {
                 font-size: 2rem;
             }
 
-            .works {
-                padding: 4rem 5%;
+            .work-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
             }
 
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 3rem;
+            .work-description {
+                padding: 2rem;
+            }
+
+            .work-description h2 {
+                font-size: 1.5rem;
+            }
+
+            .work-features h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -366,73 +371,73 @@
 <body>
     <!-- 导航栏 -->
     <nav>
-        <a href="#" class="logo">贰贰<span>乐铺</span></a>
+        <a href="index.html" class="logo">贰贰<span>乐铺</span></a>
         <button class="menu-toggle" aria-label="切换导航菜单">☰</button>
         <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#works">作品展示</a></li>
-            <li><a href="#about">关于我</a></li>
+            <li><a href="index.html#home">首页</a></li>
+            <li><a href="index.html#works">作品展示</a></li>
+            <li><a href="index.html#about">关于我</a></li>
         </ul>
     </nav>
 
-    <!-- 个人简介Banner -->
-    <section class="banner" id="home">
-        <div class="avatar">
-            <img src="images/avatar-400x400-r1.jpg" alt="个人头像">
-        </div>
-        <div class="intro">
-            <h1>你好，我是<span>贰贰乐铺</span>的创作者</h1>
-            <p>热爱设计/开发/创作（可根据你的领域修改），专注于打造有温度、有创意的作品，用细节和用心诠释每一个创作想法。</p>
-            <div class="tag">UI设计</div>
-            <div class="tag">网页开发</div>
-            <div class="tag">创意策划</div>
-        </div>
-    </section>
+    <!-- 作品详情内容 -->
+    <section class="work-detail">
+        <div class="container">
+            <div class="work-header">
+                <h1>个人博客网站开发</h1>
+                <div class="work-meta">
+                    <div class="work-meta-item"><strong>类型：</strong>前端开发</div>
+                    <div class="work-meta-item"><strong>年份：</strong>2024</div>
+                    <div class="work-meta-item"><strong>技术栈：</strong>HTML, CSS, JavaScript</div>
+                </div>
+                <div class="work-tags">
+                    <span class="work-tag">前端开发</span>
+                    <span class="work-tag">响应式设计</span>
+                    <span class="work-tag">博客系统</span>
+                </div>
+            </div>
 
-    <!-- 作品展示区 -->
-    <section class="works" id="works">
-        <h2 class="section-title">我的作品</h2>
-        <div class="work-list">
-            <!-- 作品卡片1 -->
-            <div class="work-card">
-                <img src="images/work1-card-800x500-r2.jpg" alt="作品1" class="work-img">
-                <div class="work-info">
-                    <h3>简约电商网页设计</h3>
-                    <span class="work-type">网页设计 / 2025</span>
-                    <p>基于用户体验优化的电商首页设计，采用极简风格，突出商品展示，提升转化效率。</p>
-                    <a href="work1.html">查看详情</a>
+            <div class="work-gallery">
+                <img src="images/work3-main-1200x600-r4.jpg" alt="个人博客网站开发" class="main-image">
+                <div class="sub-images">
+                    <img src="images/work3-detail-400x300-r16.jpg" alt="作品细节1" class="sub-image">
+                    <img src="images/work3-detail-400x300-r17.jpg" alt="作品细节2" class="sub-image">
+                    <img src="images/work3-detail-400x300-r18.jpg" alt="作品细节3" class="sub-image">
                 </div>
             </div>
-            <!-- 作品卡片2 -->
-            <div class="work-card">
-                <img src="images/work2-card-800x500-r3.jpg" alt="作品2" class="work-img">
-                <div class="work-info">
-                    <h3>移动端APP界面设计</h3>
-                    <span class="work-type">UI设计 / 2025</span>
-                    <p>生活类APP的全套界面设计，包含首页、分类、个人中心等核心页面，适配多尺寸屏幕。</p>
-                    <a href="work2.html">查看详情</a>
-                </div>
-            </div>
-            <!-- 作品卡片3 -->
-            <div class="work-card">
-                <img src="images/work3-card-800x500-r4.jpg" alt="作品3" class="work-img">
-                <div class="work-info">
-                    <h3>个人博客网站开发</h3>
-                    <span class="work-type">前端开发 / 2024</span>
-                    <p>基于HTML+CSS+JavaScript开发的响应式个人博客，支持文章分类、标签筛选等功能。</p>
-                    <a href="work3.html">查看详情</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 关于我区域 -->
-    <section class="about" id="about">
-        <div class="about-content">
-            <h2>关于贰贰乐铺</h2>
-            <p>“贰贰乐铺”是我的个人创作小站，“贰贰”代表着双倍的用心、双倍的热爱，“乐铺”则是希望把创作当成一件快乐的事，用心打磨每一个作品，分享每一份创作的喜悦。</p>
-            <p>我擅长网页设计、前端开发、UI设计等领域（可替换为你的擅长领域），始终坚持“简约而不简单”的创作理念，注重用户体验和视觉美感的平衡。</p>
-            <p>如果你喜欢我的作品，或者有合作意向，欢迎随时联系我～</p>
+            <div class="work-description">
+                <h2>项目概述</h2>
+                <p>本项目是基于HTML+CSS+JavaScript开发的响应式个人博客，支持文章分类、标签筛选等功能。设计和开发过程中，我们注重代码的可维护性和扩展性，力求打造一个既美观又实用的博客系统。</p>
+                <p>项目特点包括：响应式设计适配各种设备、简洁美观的界面、丰富的功能模块、良好的用户体验，以及易于扩展的代码架构。</p>
+                <p>通过这个项目，我们展示了前端开发的核心技能，包括HTML语义化、CSS布局和动画、JavaScript交互，以及响应式设计等。同时，我们也注重代码的性能优化和可维护性，确保项目具有良好的扩展性和可维护性。</p>
+            </div>
+
+            <div class="work-features">
+                <h2>技术亮点</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>纯前端实现</h3>
+                        <p>采用纯HTML+CSS+JavaScript开发，无需后端支持，方便部署和维护。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>响应式设计</h3>
+                        <p>完美适配各种设备尺寸，从桌面端到移动端，提供一致的优质体验。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>模块化架构</h3>
+                        <p>采用模块化的代码架构，便于扩展和维护，支持添加新功能模块。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>优秀的性能</h3>
+                        <p>优化的代码和资源加载策略，确保网站加载快速，运行流畅。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="index.html#works" class="back-button">返回作品列表</a>
+            </div>
         </div>
     </section>
 
