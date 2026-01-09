@@ -407,112 +407,44 @@
                 font-size: 1em;
             }
             
-            /* Table - Mobile Card Layout */
+            /* Table */
             table {
+                font-size: 0.85em;
                 display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
                 width: 100%;
             }
             
             thead {
-                display: none;
+                display: table-header-group;
             }
             
             tbody {
-                display: block;
+                display: table-row-group;
             }
             
-            tbody tr {
-                display: block;
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                margin-bottom: 15px;
-                padding: 15px;
+            tr {
+                display: table-row;
             }
             
-            tbody tr:last-child {
-                margin-bottom: 0;
-            }
-            
-            td {
-                display: block;
-                padding: 8px 0;
-                text-align: left;
-                border: none;
-                font-size: 0.9em;
-            }
-            
-            td:before {
-                content: attr(data-label);
-                font-weight: 700;
-                color: #667eea;
-                display: block;
-                margin-bottom: 5px;
+            th, td {
+                padding: 12px 8px;
                 font-size: 0.85em;
+                white-space: nowrap;
             }
             
-            /* 期次和日期合并显示（第一个td） */
-            td:nth-child(1) {
-                border-bottom: 1px solid #f0f0f0;
-                padding-bottom: 10px;
-                margin-bottom: 10px;
-                text-align: center;
-            }
-            
-            td:nth-child(1):before {
-                text-align: center;
-            }
-            
-            /* 隐藏第二个td（日期，已在第一个td中显示） */
-            td:nth-child(2) {
-                display: none;
-            }
-            
-            /* 红球和蓝球 */
-            td:nth-child(3), td:nth-child(4) {
-                display: block;
-                width: 100%;
-                padding: 8px 0;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            td:nth-child(3):before {
-                display: block;
-                margin-bottom: 8px;
-                text-align: center;
-            }
-            
-            td:nth-child(4):before {
-                display: block;
-                margin-bottom: 8px;
-                text-align: center;
-            }
-            
-            /* 销售额和奖池合并显示（第五个td） */
-            td:nth-child(5) {
-                border-top: 1px solid #f0f0f0;
-                padding-top: 10px;
-                margin-top: 10px;
-                border-bottom: none;
-                text-align: center;
-            }
-            
-            td:nth-child(5):before {
-                text-align: center;
-            }
-            
-            /* 隐藏第六个td（奖池，已在第五个td中显示） */
-            td:nth-child(6) {
-                display: none;
+            th {
+                font-size: 0.8em;
+                padding: 15px 8px;
             }
             
             .red-ball, .blue-ball {
-                width: 24px;
-                height: 24px;
-                line-height: 24px;
-                font-size: 0.7em;
-                margin: 0 2px;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 0.75em;
+                margin: 0 1px;
             }
             
             /* Info Box */
@@ -559,11 +491,10 @@
             }
             
             .red-ball, .blue-ball {
-                width: 22px;
-                height: 22px;
-                line-height: 22px;
-                font-size: 0.65em;
-                margin: 0 1px;
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 0.8em;
             }
             
             .prediction-ball {
@@ -579,7 +510,7 @@
     <!-- Header -->
     <div class="header">
         <h1>双色球分析报告</h1>
-        <p>生成时间: 2026年01月09日 22:55:23</p>
+        <p>生成时间: 2026年01月09日 22:56:12</p>
     </div>
     
     <div class="container">
@@ -1089,453 +1020,453 @@
                 <tbody>
 
                     <tr>
-                        <td data-label="期次">2026003<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2026-01-06(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2026003</td>
+                        <td data-label="日期">2026-01-06(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">16</span></td>
-                        <td data-label="销售额">352,267,432<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,761,523,177</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">352,267,432</td>
+                        <td data-label="奖池">2,761,523,177</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2026002<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2026-01-04(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2026002</td>
+                        <td data-label="日期">2026-01-04(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">02</span></td>
-                        <td data-label="销售额">377,330,734<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,717,326,577</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">377,330,734</td>
+                        <td data-label="奖池">2,717,326,577</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2026001<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2026-01-01(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2026001</td>
+                        <td data-label="日期">2026-01-01(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">15</span></td>
-                        <td data-label="销售额">348,080,190<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,718,022,399</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">348,080,190</td>
+                        <td data-label="奖池">2,718,022,399</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025151<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-30(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025151</td>
+                        <td data-label="日期">2025-12-30(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">04</span></td>
-                        <td data-label="销售额">369,383,528<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,688,298,050</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">369,383,528</td>
+                        <td data-label="奖池">2,688,298,050</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025150<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-28(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025150</td>
+                        <td data-label="日期">2025-12-28(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">08</span></td>
-                        <td data-label="销售额">388,447,078<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,673,213,583</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">388,447,078</td>
+                        <td data-label="奖池">2,673,213,583</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025149<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-25(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025149</td>
+                        <td data-label="日期">2025-12-25(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">355,328,424<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,655,142,533</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">355,328,424</td>
+                        <td data-label="奖池">2,655,142,533</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025148<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-23(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025148</td>
+                        <td data-label="日期">2025-12-23(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">22</span></td>
                         <td data-label="蓝球"><span class="blue-ball">16</span></td>
-                        <td data-label="销售额">353,582,370<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,669,426,999</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">353,582,370</td>
+                        <td data-label="奖池">2,669,426,999</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025147<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-21(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025147</td>
+                        <td data-label="日期">2025-12-21(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">08</span></td>
-                        <td data-label="销售额">392,695,744<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,654,856,315</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">392,695,744</td>
+                        <td data-label="奖池">2,654,856,315</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025146<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-18(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025146</td>
+                        <td data-label="日期">2025-12-18(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">28</span></td>
                         <td data-label="蓝球"><span class="blue-ball">02</span></td>
-                        <td data-label="销售额">365,633,358<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,718,302,859</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">365,633,358</td>
+                        <td data-label="奖池">2,718,302,859</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025145<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-16(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025145</td>
+                        <td data-label="日期">2025-12-16(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">14</span></td>
-                        <td data-label="销售额">356,306,424<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,711,897,665</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">356,306,424</td>
+                        <td data-label="奖池">2,711,897,665</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025144<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-14(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025144</td>
+                        <td data-label="日期">2025-12-14(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">13</span></td>
-                        <td data-label="销售额">379,272,340<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,736,534,730</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">379,272,340</td>
+                        <td data-label="奖池">2,736,534,730</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025143<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-11(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025143</td>
+                        <td data-label="日期">2025-12-11(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">24</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">357,498,010<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,766,563,293</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">357,498,010</td>
+                        <td data-label="奖池">2,766,563,293</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025142<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-09(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025142</td>
+                        <td data-label="日期">2025-12-09(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">16</span></td>
-                        <td data-label="销售额">353,205,678<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,743,073,255</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">353,205,678</td>
+                        <td data-label="奖池">2,743,073,255</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025141<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-07(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025141</td>
+                        <td data-label="日期">2025-12-07(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span></td>
                         <td data-label="蓝球"><span class="blue-ball">06</span></td>
-                        <td data-label="销售额">390,055,596<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,697,873,796</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">390,055,596</td>
+                        <td data-label="奖池">2,697,873,796</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025140<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-04(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025140</td>
+                        <td data-label="日期">2025-12-04(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">24</span></td>
                         <td data-label="蓝球"><span class="blue-ball">05</span></td>
-                        <td data-label="销售额">362,437,084<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,690,606,470</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">362,437,084</td>
+                        <td data-label="奖池">2,690,606,470</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025139<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-12-02(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025139</td>
+                        <td data-label="日期">2025-12-02(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">06</span></td>
-                        <td data-label="销售额">358,264,332<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,655,816,573</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">358,264,332</td>
+                        <td data-label="奖池">2,655,816,573</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025138<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-30(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025138</td>
+                        <td data-label="日期">2025-11-30(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">27</span></td>
                         <td data-label="蓝球"><span class="blue-ball">15</span></td>
-                        <td data-label="销售额">396,317,254<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,620,027,948</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">396,317,254</td>
+                        <td data-label="奖池">2,620,027,948</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025137<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-27(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025137</td>
+                        <td data-label="日期">2025-11-27(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">29</span></td>
                         <td data-label="蓝球"><span class="blue-ball">05</span></td>
-                        <td data-label="销售额">364,942,202<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,563,690,940</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">364,942,202</td>
+                        <td data-label="奖池">2,563,690,940</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025136<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-25(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025136</td>
+                        <td data-label="日期">2025-11-25(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">12</span></td>
-                        <td data-label="销售额">361,034,006<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,583,189,299</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">361,034,006</td>
+                        <td data-label="奖池">2,583,189,299</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025135<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-23(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025135</td>
+                        <td data-label="日期">2025-11-23(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">400,247,838<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,742,951,835</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">400,247,838</td>
+                        <td data-label="奖池">2,742,951,835</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025134<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-20(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025134</td>
+                        <td data-label="日期">2025-11-20(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">29</span></td>
                         <td data-label="蓝球"><span class="blue-ball">12</span></td>
-                        <td data-label="销售额">374,640,566<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,723,830,474</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">374,640,566</td>
+                        <td data-label="奖池">2,723,830,474</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025133<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-18(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025133</td>
+                        <td data-label="日期">2025-11-18(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">07</span></td>
-                        <td data-label="销售额">363,914,948<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,738,063,876</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">363,914,948</td>
+                        <td data-label="奖池">2,738,063,876</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025132<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-16(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025132</td>
+                        <td data-label="日期">2025-11-16(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">11</span></td>
-                        <td data-label="销售额">409,235,610<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,810,082,951</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">409,235,610</td>
+                        <td data-label="奖池">2,810,082,951</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025131<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-13(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025131</td>
+                        <td data-label="日期">2025-11-13(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">385,122,072<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,798,991,596</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">385,122,072</td>
+                        <td data-label="奖池">2,798,991,596</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025130<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-11(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025130</td>
+                        <td data-label="日期">2025-11-11(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">23</span></td>
                         <td data-label="蓝球"><span class="blue-ball">06</span></td>
-                        <td data-label="销售额">377,466,594<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,776,600,809</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">377,466,594</td>
+                        <td data-label="奖池">2,776,600,809</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025129<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-09(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025129</td>
+                        <td data-label="日期">2025-11-09(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">403,899,176<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,822,006,563</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">403,899,176</td>
+                        <td data-label="奖池">2,822,006,563</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025128<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-06(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025128</td>
+                        <td data-label="日期">2025-11-06(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">27</span></td>
                         <td data-label="蓝球"><span class="blue-ball">01</span></td>
-                        <td data-label="销售额">371,066,844<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,840,807,340</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">371,066,844</td>
+                        <td data-label="奖池">2,840,807,340</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025127<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-04(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025127</td>
+                        <td data-label="日期">2025-11-04(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">28</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">360,915,142<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,849,527,123</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">360,915,142</td>
+                        <td data-label="奖池">2,849,527,123</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025126<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-11-02(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025126</td>
+                        <td data-label="日期">2025-11-02(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">25</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">399,441,700<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,846,957,929</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">399,441,700</td>
+                        <td data-label="奖池">2,846,957,929</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025125<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-30(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025125</td>
+                        <td data-label="日期">2025-10-30(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">09</span></td>
-                        <td data-label="销售额">358,732,158<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,821,493,961</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">358,732,158</td>
+                        <td data-label="奖池">2,821,493,961</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025124<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-28(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025124</td>
+                        <td data-label="日期">2025-10-28(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">13</span></td>
-                        <td data-label="销售额">354,991,248<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,871,762,236</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">354,991,248</td>
+                        <td data-label="奖池">2,871,762,236</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025123<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-26(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025123</td>
+                        <td data-label="日期">2025-10-26(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">26</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">386,747,886<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,875,974,569</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">386,747,886</td>
+                        <td data-label="奖池">2,875,974,569</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025122<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-23(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025122</td>
+                        <td data-label="日期">2025-10-23(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">13</span></td>
-                        <td data-label="销售额">363,694,232<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,875,067,397</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">363,694,232</td>
+                        <td data-label="奖池">2,875,067,397</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025121<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-21(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025121</td>
+                        <td data-label="日期">2025-10-21(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">08</span></td>
-                        <td data-label="销售额">354,466,956<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,847,262,236</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">354,466,956</td>
+                        <td data-label="奖池">2,847,262,236</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025120<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-19(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025120</td>
+                        <td data-label="日期">2025-10-19(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">07</span></td>
-                        <td data-label="销售额">385,873,150<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,880,926,922</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">385,873,150</td>
+                        <td data-label="奖池">2,880,926,922</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025119<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-16(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025119</td>
+                        <td data-label="日期">2025-10-16(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">11</span></td>
-                        <td data-label="销售额">364,080,712<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,819,294,293</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">364,080,712</td>
+                        <td data-label="奖池">2,819,294,293</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025118<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-14(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025118</td>
+                        <td data-label="日期">2025-10-14(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">26</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">357,347,556<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,840,423,562</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">357,347,556</td>
+                        <td data-label="奖池">2,840,423,562</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025117<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-12(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025117</td>
+                        <td data-label="日期">2025-10-12(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">389,301,568<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,819,850,462</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">389,301,568</td>
+                        <td data-label="奖池">2,819,850,462</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025116<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-09(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025116</td>
+                        <td data-label="日期">2025-10-09(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">09</span></td>
-                        <td data-label="销售额">363,037,044<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,802,882,002</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">363,037,044</td>
+                        <td data-label="奖池">2,802,882,002</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025115<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-07(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025115</td>
+                        <td data-label="日期">2025-10-07(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">02</span></td>
-                        <td data-label="销售额">330,722,178<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,797,883,669</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">330,722,178</td>
+                        <td data-label="奖池">2,797,883,669</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025114<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-10-05(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025114</td>
+                        <td data-label="日期">2025-10-05(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">27</span></td>
                         <td data-label="蓝球"><span class="blue-ball">10</span></td>
-                        <td data-label="销售额">306,235,982<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,942,942,799</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">306,235,982</td>
+                        <td data-label="奖池">2,942,942,799</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025113<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-30(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025113</td>
+                        <td data-label="日期">2025-09-30(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">16</span></td>
-                        <td data-label="销售额">376,311,750<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,931,095,408</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">376,311,750</td>
+                        <td data-label="奖池">2,931,095,408</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025112<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-28(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025112</td>
+                        <td data-label="日期">2025-09-28(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">32</span></td>
                         <td data-label="蓝球"><span class="blue-ball">02</span></td>
-                        <td data-label="销售额">398,243,350<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,882,384,020</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">398,243,350</td>
+                        <td data-label="奖池">2,882,384,020</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025111<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-25(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025111</td>
+                        <td data-label="日期">2025-09-25(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">12</span></td>
-                        <td data-label="销售额">366,420,958<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,846,924,292</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">366,420,958</td>
+                        <td data-label="奖池">2,846,924,292</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025110<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-23(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025110</td>
+                        <td data-label="日期">2025-09-23(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">19</span></td>
                         <td data-label="蓝球"><span class="blue-ball">08</span></td>
-                        <td data-label="销售额">364,932,922<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,817,720,121</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">364,932,922</td>
+                        <td data-label="奖池">2,817,720,121</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025109<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-21(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025109</td>
+                        <td data-label="日期">2025-09-21(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">31</span></td>
                         <td data-label="蓝球"><span class="blue-ball">03</span></td>
-                        <td data-label="销售额">398,851,460<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,798,817,511</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">398,851,460</td>
+                        <td data-label="奖池">2,798,817,511</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025108<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-18(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025108</td>
+                        <td data-label="日期">2025-09-18(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">07</span></td>
-                        <td data-label="销售额">359,262,232<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,819,783,316</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">359,262,232</td>
+                        <td data-label="奖池">2,819,783,316</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025107<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-16(二)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025107</td>
+                        <td data-label="日期">2025-09-16(二)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">33</span></td>
                         <td data-label="蓝球"><span class="blue-ball">13</span></td>
-                        <td data-label="销售额">352,042,890<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,799,363,828</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">352,042,890</td>
+                        <td data-label="奖池">2,799,363,828</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025106<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-14(日)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025106</td>
+                        <td data-label="日期">2025-09-14(日)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">30</span></td>
                         <td data-label="蓝球"><span class="blue-ball">04</span></td>
-                        <td data-label="销售额">383,828,310<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,754,326,369</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">383,828,310</td>
+                        <td data-label="奖池">2,754,326,369</td>
                     </tr>
 
                     <tr>
-                        <td data-label="期次">2025105<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">2025-09-11(四)</span></td>
-                        <td data-label="日期"></td>
+                        <td data-label="期次">2025105</td>
+                        <td data-label="日期">2025-09-11(四)</td>
                         <td data-label="红球"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">28</span></td>
                         <td data-label="蓝球"><span class="blue-ball">08</span></td>
-                        <td data-label="销售额">357,186,846<br><span style="font-size: 0.85em; color: #666; font-weight: normal;">奖池: 2,733,576,679</span></td>
-                        <td data-label="奖池"></td>
+                        <td data-label="销售额">357,186,846</td>
+                        <td data-label="奖池">2,733,576,679</td>
                     </tr>
 
                 </tbody>
