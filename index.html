@@ -456,6 +456,11 @@
                 border-bottom: 1px solid #f0f0f0;
                 padding-bottom: 10px;
                 margin-bottom: 10px;
+                text-align: center;
+            }
+            
+            td:nth-child(1):before {
+                text-align: center;
             }
             
             /* 隐藏第二个td（日期，已在第一个td中显示） */
@@ -465,21 +470,23 @@
             
             /* 红球和蓝球 */
             td:nth-child(3), td:nth-child(4) {
-                display: inline-block;
-                width: auto;
+                display: block;
+                width: 100%;
                 padding: 8px 0;
-                margin-right: 15px;
-                vertical-align: top;
+                text-align: center;
+                margin-bottom: 10px;
             }
             
             td:nth-child(3):before {
                 display: block;
                 margin-bottom: 8px;
+                text-align: center;
             }
             
             td:nth-child(4):before {
                 display: block;
                 margin-bottom: 8px;
+                text-align: center;
             }
             
             /* 销售额和奖池合并显示（第五个td） */
@@ -488,6 +495,11 @@
                 padding-top: 10px;
                 margin-top: 10px;
                 border-bottom: none;
+                text-align: center;
+            }
+            
+            td:nth-child(5):before {
+                text-align: center;
             }
             
             /* 隐藏第六个td（奖池，已在第五个td中显示） */
@@ -567,7 +579,7 @@
     <!-- Header -->
     <div class="header">
         <h1>双色球分析报告</h1>
-        <p>生成时间: 2026年01月09日 22:53:05</p>
+        <p>生成时间: 2026年01月09日 22:55:23</p>
     </div>
     
     <div class="container">
