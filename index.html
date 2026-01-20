@@ -510,10 +510,61 @@
     <!-- Header -->
     <div class="header">
         <h1>双色球分析报告</h1>
-        <p>生成时间: 2026年01月21日 01:43:42</p>
+        <p>生成时间: 2026年01月21日 01:47:29</p>
     </div>
     
     <div class="container">
+        <!-- 下一期预测 -->
+        <div class="section">
+            <div class="section-title">下一期预测分析（期次: 2026010）</div>
+            <div class="prediction-grid">
+                <div class="prediction-card">
+                    <div class="prediction-title">红球推荐（8个）</div>
+                    <p style="color: #666; margin-bottom: 10px;">基于数学模型分析（时间衰减+期望值+趋势分析）</p>
+                    <div class="prediction-list" style="margin-top: 15px;">
+                                <span class="prediction-ball red-ball">09</span>
+                                <span class="prediction-ball red-ball">06</span>
+                                <span class="prediction-ball red-ball">13</span>
+                                <span class="prediction-ball red-ball">30</span>
+                                <span class="prediction-ball red-ball">33</span>
+                                <span class="prediction-ball red-ball">02</span>
+                                <span class="prediction-ball red-ball">03</span>
+                                <span class="prediction-ball red-ball">27</span>
+                            </div>
+                </div>
+                
+                <div class="prediction-card">
+                    <div class="prediction-title">蓝球推荐（2个）</div>
+                    <p style="color: #666; margin-bottom: 10px;">基于数学模型分析（时间衰减+期望值+趋势分析+遗漏补偿）</p>
+                    <div class="prediction-list" style="margin-top: 15px;">
+                                <span class="prediction-ball blue-ball">10</span>
+                                <span class="prediction-ball blue-ball">15</span>
+                            </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>预测说明</h3>
+                <ul>
+                    <li><strong>红球推荐算法：</strong>基于近100期数据，采用综合数学模型分析，包括：</li>
+                    <li style="padding-left: 20px;">• 时间衰减模型（30%权重）：越近期的数据权重越高，使用指数衰减函数</li>
+                    <li style="padding-left: 20px;">• 频率期望值（25%权重）：基于出现频率与理论期望值的对比分析</li>
+                    <li style="padding-left: 20px;">• 近期性得分（20%权重）：最近出现的号码获得更高权重</li>
+                    <li style="padding-left: 20px;">• 稳定性分析（15%权重）：分析号码出现间隔的稳定性</li>
+                    <li style="padding-left: 20px;">• 趋势分析（10%权重）：分析最近10期的上升/下降趋势</li>
+                    <li><strong>蓝球推荐算法：</strong>基于近100期数据，采用综合数学模型分析，包括：</li>
+                    <li style="padding-left: 20px;">• 时间衰减模型（25%权重）：越近期的数据权重越高，使用指数衰减函数</li>
+                    <li style="padding-left: 20px;">• 频率期望值（20%权重）：基于出现频率与理论期望值的对比分析</li>
+                    <li style="padding-left: 20px;">• 近期性得分（25%权重）：最近出现的号码获得更高权重（蓝球更注重近期）</li>
+                    <li style="padding-left: 20px;">• 稳定性分析（10%权重）：分析号码出现间隔的稳定性</li>
+                    <li style="padding-left: 20px;">• 趋势分析（10%权重）：分析最近15期的上升/下降趋势</li>
+                    <li style="padding-left: 20px;">• 遗漏补偿分析（10%权重）：分析长期未出现的号码，可能即将出现</li>
+                    <li><strong>建议：</strong>结合概率分析，合理搭配选择号码</li>
+                    <li><strong>注意：</strong>彩票开奖具有随机性，本分析仅供参考，不构成投注建议</li>
+                </ul>
+            </div>
+        </div>
+        
         <!-- 数据概览 -->
         <div class="section">
             <div class="section-title">数据概览</div>
@@ -524,11 +575,11 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">最新期次</div>
-                    <div class="stat-value">2026009</div>
+                    <div class="stat-value">{latest_code}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">预测期次</div>
-                    <div class="stat-value">2026010</div>
+                    <div class="stat-value">{next_code}</div>
                 </div>
             </div>
         </div>
@@ -938,63 +989,6 @@
                     <div class="ball-probability">3.0%</div>
                 </div>
 
-            </div>
-        </div>
-        
-        <!-- 下一期预测 -->
-        <div class="section">
-            <div class="section-title">下一期预测分析（期次: 2026010）</div>
-            <div class="prediction-grid">
-                <div class="prediction-card">
-                    <div class="prediction-title">红球推荐（8个）</div>
-                    <p style="color: #666; margin-bottom: 10px;">基于数学模型分析（时间衰减+期望值+趋势分析）</p>
-                    <div class="prediction-list" style="margin-top: 15px;">
-                                <span class="prediction-ball red-ball">09</span>
-                                <span class="prediction-ball red-ball">06</span>
-                                <span class="prediction-ball red-ball">13</span>
-                                <span class="prediction-ball red-ball">30</span>
-                                <span class="prediction-ball red-ball">33</span>
-                                <span class="prediction-ball red-ball">02</span>
-                                <span class="prediction-ball red-ball">03</span>
-                                <span class="prediction-ball red-ball">27</span>
-                            </div>
-                </div>
-                
-                <div class="prediction-card">
-                    <div class="prediction-title">蓝球推荐（4个）</div>
-                    <p style="color: #666; margin-bottom: 10px;">高频2个 + 低频2个</p>
-                    <div style="margin-bottom: 15px;">
-                        <div style="margin-bottom: 10px;">
-                            <span style="font-size: 0.9em; color: #999;">高频：</span>
-                            <div class="prediction-list" style="margin-top: 5px;">
-                                <span class="prediction-ball blue-ball">10</span>
-                                <span class="prediction-ball blue-ball">05</span>
-                            </div>
-                        </div>
-                        <div>
-                            <span style="font-size: 0.9em; color: #999;">低频：</span>
-                            <div class="prediction-list" style="margin-top: 5px;">
-                                <span class="prediction-ball blue-ball" style="opacity: 0.8;">01</span>
-                                <span class="prediction-ball blue-ball" style="opacity: 0.8;">09</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="info-box">
-                <h3>预测说明</h3>
-                <ul>
-                    <li><strong>红球推荐算法：</strong>基于近100期数据，采用综合数学模型分析，包括：</li>
-                    <li style="padding-left: 20px;">• 时间衰减模型（30%权重）：越近期的数据权重越高，使用指数衰减函数</li>
-                    <li style="padding-left: 20px;">• 频率期望值（25%权重）：基于出现频率与理论期望值的对比分析</li>
-                    <li style="padding-left: 20px;">• 近期性得分（20%权重）：最近出现的号码获得更高权重</li>
-                    <li style="padding-left: 20px;">• 稳定性分析（15%权重）：分析号码出现间隔的稳定性</li>
-                    <li style="padding-left: 20px;">• 趋势分析（10%权重）：分析最近10期的上升/下降趋势</li>
-                    <li><strong>蓝球推荐：</strong>基于近100期数据，推荐2个高频蓝球号码 + 2个低频蓝球号码（共4个）</li>
-                    <li><strong>建议：</strong>结合概率分析，合理搭配选择号码</li>
-                    <li><strong>注意：</strong>彩票开奖具有随机性，本分析仅供参考，不构成投注建议</li>
-                </ul>
             </div>
         </div>
         
