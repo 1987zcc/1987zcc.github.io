@@ -46274,5 +46274,28 @@
     "type5money": "10",
     "type6num": "7428441",
     "type6money": "5"
+  },
+  {
+    "id": 2058,
+    "code": "2026055",
+    "date": "2026-05-17(日)",
+    "week": "日",
+    "red": "04,11,24,25,32,33",
+    "blue": "13",
+    "sales": "422769486",
+    "poolmoney": "1237107160",
+    "content": "河北1注，浙江1注，福建1注，共3注。",
+    "type1num": "3",
+    "type1money": "10000000",
+    "type2num": "155",
+    "type2money": "392861",
+    "type3num": "1238",
+    "type3money": "3000",
+    "type4num": "73744",
+    "type4money": "200",
+    "type5num": "1274943",
+    "type5money": "10",
+    "type6num": "11158110",
+    "type6money": "5"
   }
 ]
