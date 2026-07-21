@@ -46918,5 +46918,28 @@
     "type5money": "10",
     "type6num": "8520356",
     "type6money": "5"
+  },
+  {
+    "id": 2086,
+    "code": "2026083",
+    "date": "2026-07-21(二)",
+    "week": "二",
+    "red": "07,14,15,23,28,33",
+    "blue": "03",
+    "sales": "348240258",
+    "poolmoney": "480802779",
+    "content": "共0注。",
+    "type1num": "0",
+    "type1money": "0",
+    "type2num": "111",
+    "type2money": "214159",
+    "type3num": "1277",
+    "type3money": "3000",
+    "type4num": "59735",
+    "type4money": "200",
+    "type5num": "1122950",
+    "type5money": "10",
+    "type6num": "9708655",
+    "type6money": "5"
   }
 ]
