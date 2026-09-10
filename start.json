@@ -47424,5 +47424,28 @@
     "type5money": "10",
     "type6num": "9091759",
     "type6money": "5"
+  },
+  {
+    "id": 2108,
+    "code": "2026105",
+    "date": "2026-09-10(四)",
+    "week": "四",
+    "red": "02,04,13,14,15,30",
+    "blue": "08",
+    "sales": "333874688",
+    "poolmoney": "833007469",
+    "content": "四川1注，共1注。",
+    "type1num": "1",
+    "type1money": "10000000",
+    "type2num": "100",
+    "type2money": "148168",
+    "type3num": "1524",
+    "type3money": "3000",
+    "type4num": "74016",
+    "type4money": "200",
+    "type5num": "1329462",
+    "type5money": "10",
+    "type6num": "14332306",
+    "type6money": "5"
   }
 ]
