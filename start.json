@@ -47792,5 +47792,28 @@
     "type5money": "10",
     "type6num": "8247425",
     "type6money": "5"
+  },
+  {
+    "id": 2124,
+    "code": "2026121",
+    "date": "2026-10-22(四)",
+    "week": "四",
+    "red": "02,07,20,24,26,30",
+    "blue": "02",
+    "sales": "336574558",
+    "poolmoney": "1056741122",
+    "content": "北京1注，辽宁1注，上海2注，河南1注，四川1注，共6注。",
+    "type1num": "6",
+    "type1money": "8113808",
+    "type2num": "72",
+    "type2money": "324355",
+    "type3num": "988",
+    "type3money": "3000",
+    "type4num": "59814",
+    "type4money": "200",
+    "type5num": "1181812",
+    "type5money": "10",
+    "type6num": "8952469",
+    "type6money": "5"
   }
 ]
