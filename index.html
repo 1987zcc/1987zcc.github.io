@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双色球分析报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #333;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .stat-value {
+            font-size: 3em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Frequency Grid */
+        .frequency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .ball-item {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        
+        .ball-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        
+        .ball-number {
+            font-size: 1.0em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .red-ball {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+        
+        .blue-ball {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(59,130,246,0.3);
+        }
+        
+        .ball-count {
+            color: #666;
+            font-size: 0.95em;
+            margin: 8px 0;
+        }
+        
+        .ball-probability {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        /* Prediction Cards */
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .prediction-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .prediction-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .prediction-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .prediction-ball {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 20px 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1em;
+        }
+        
+        td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        
+        /* 期次日期列样式 */
+        td:nth-child(1) {
+            min-width: 120px;
+        }
+        
+        /* 开奖球列样式 */
+        td:nth-child(2) {
+            min-width: 200px;
+        }
+        
+        /* 金额信息列样式 */
+        td:nth-child(3) {
+            min-width: 150px;
+            text-align: left;
+        }
+        
+        td:nth-child(3) div {
+            font-size: 0.9em;
+        }
+        
+        td:nth-child(3) strong {
+            color: #667eea;
+            margin-right: 5px;
+        }
+        
+        tbody tr {
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-top: 40px;
+        }
+        
+        .info-box h3 {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-box li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-box strong {
+            color: #333;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        /* Responsive - Mobile */
+        @media (max-width: 768px) {
+            /* Header */
+            .header {
+                padding: 50px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            /* Container */
+            .container {
+                padding: 30px 15px;
+            }
+            
+            /* Section */
+            .section {
+                margin-bottom: 50px;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+            }
+            
+            /* Stats Grid */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-bottom: 40px;
+            }
+            
+            .stat-card {
+                padding: 30px 20px;
+            }
+            
+            .stat-value {
+                font-size: 2.5em;
+            }
+            
+            .stat-label {
+                font-size: 1em;
+            }
+            
+            /* Frequency Grid */
+            .frequency-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 12px;
+                margin-top: 25px;
+            }
+            
+            .ball-item {
+                padding: 15px 10px;
+            }
+            
+            .ball-number {
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+            
+            .red-ball, .blue-ball {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 0.9em;
+            }
+            
+            .ball-count {
+                font-size: 0.85em;
+                margin: 5px 0;
+            }
+            
+            .ball-probability {
+                font-size: 1em;
+            }
+            
+            /* Prediction Grid */
+            .prediction-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 25px;
+            }
+            
+            .prediction-card {
+                padding: 25px 20px;
+            }
+            
+            .prediction-title {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+            
+            .prediction-ball {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1em;
+            }
+            
+            /* Table */
+            table {
+                font-size: 0.85em;
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+            
+            thead {
+                display: table-header-group;
+            }
+            
+            tbody {
+                display: table-row-group;
+            }
+            
+            tr {
+                display: table-row;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.85em;
+            }
+            
+            th {
+                font-size: 0.8em;
+                padding: 15px 8px;
+            }
+            
+            /* 移动端：期次日期列样式 */
+            td:nth-child(1) {
+                white-space: normal;
+                min-width: auto;
+                font-size: 0.85em;
+            }
+            
+            /* 移动端：开奖球列允许换行 */
+            td:nth-child(2) {
+                white-space: normal;
+                min-width: auto;
+            }
+            
+            /* 移动端：金额信息列样式 */
+            td:nth-child(3) {
+                white-space: normal;
+                min-width: auto;
+                text-align: left;
+                font-size: 0.8em;
+            }
+            
+            td:nth-child(3) div {
+                font-size: 0.85em;
+            }
+            
+            .red-ball, .blue-ball {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 0.7em;
+                margin: 0 1px;
+            }
+            
+            /* Info Box */
+            .info-box {
+                padding: 25px 20px;
+                margin-top: 30px;
+            }
+            
+            .info-box h3 {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+            
+            .info-box li {
+                padding: 10px 0;
+                font-size: 0.9em;
+                line-height: 1.6;
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 30px 15px;
+                margin-top: 50px;
+            }
+            
+            .footer p {
+                font-size: 0.9em;
+            }
+        }
+        
+        /* Responsive - Small Mobile */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .section-title {
+                font-size: 1.3em;
+            }
+            
+            .frequency-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+                gap: 10px;
+            }
+            
+            .red-ball, .blue-ball {
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 0.8em;
+            }
+            
+            .prediction-ball {
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>双色球分析报告</h1>
+        <p>生成时间: 2026年11月19日 21:26:11</p>
+    </div>
+    
+    <div class="container">
+        <!-- 下一期预测 -->
+        <div class="section">
+            <div class="section-title">下一期预测分析（期次: 2026133）</div>
+            <div class="prediction-grid">
+                <div class="prediction-card">
+                    <div class="prediction-title">红球推荐（8个）</div>
+                    <p style="color: #666; margin-bottom: 10px;">基于数学模型分析（时间衰减+期望值+趋势分析）</p>
+                    <div class="prediction-list" style="margin-top: 15px;">
+                                <span class="prediction-ball red-ball">30</span>
+                                <span class="prediction-ball red-ball">13</span>
+                                <span class="prediction-ball red-ball">05</span>
+                                <span class="prediction-ball red-ball">10</span>
+                                <span class="prediction-ball red-ball">09</span>
+                                <span class="prediction-ball red-ball">26</span>
+                                <span class="prediction-ball red-ball">20</span>
+                                <span class="prediction-ball red-ball">06</span>
+                            </div>
+                </div>
+                
+                <div class="prediction-card">
+                    <div class="prediction-title">蓝球推荐（2个）</div>
+                    <p style="color: #666; margin-bottom: 10px;">基于数学模型分析（时间衰减+期望值+趋势分析+遗漏补偿）</p>
+                    <div class="prediction-list" style="margin-top: 15px;">
+                                <span class="prediction-ball blue-ball">11</span>
+                                <span class="prediction-ball blue-ball">02</span>
+                            </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>预测说明</h3>
+                <ul>
+                    <li><strong>红球推荐算法：</strong>基于近100期数据，采用综合数学模型分析，包括：</li>
+                    <li style="padding-left: 20px;">• 时间衰减模型（30%权重）：越近期的数据权重越高，使用指数衰减函数</li>
+                    <li style="padding-left: 20px;">• 频率期望值（25%权重）：基于出现频率与理论期望值的对比分析</li>
+                    <li style="padding-left: 20px;">• 近期性得分（20%权重）：最近出现的号码获得更高权重</li>
+                    <li style="padding-left: 20px;">• 稳定性分析（15%权重）：分析号码出现间隔的稳定性</li>
+                    <li style="padding-left: 20px;">• 趋势分析（10%权重）：分析最近10期的上升/下降趋势</li>
+                    <li><strong>蓝球推荐算法：</strong>基于近100期数据，采用综合数学模型分析，包括：</li>
+                    <li style="padding-left: 20px;">• 时间衰减模型（25%权重）：越近期的数据权重越高，使用指数衰减函数</li>
+                    <li style="padding-left: 20px;">• 频率期望值（20%权重）：基于出现频率与理论期望值的对比分析</li>
+                    <li style="padding-left: 20px;">• 近期性得分（25%权重）：最近出现的号码获得更高权重（蓝球更注重近期）</li>
+                    <li style="padding-left: 20px;">• 稳定性分析（10%权重）：分析号码出现间隔的稳定性</li>
+                    <li style="padding-left: 20px;">• 趋势分析（10%权重）：分析最近15期的上升/下降趋势</li>
+                    <li style="padding-left: 20px;">• 遗漏补偿分析（10%权重）：分析长期未出现的号码，可能即将出现</li>
+                    <li><strong>建议：</strong>结合概率分析，合理搭配选择号码</li>
+                    <li><strong>注意：</strong>彩票开奖具有随机性，本分析仅供参考，不构成投注建议</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 红球概率统计 -->
+        <div class="section">
+            <div class="section-title">红球出现概率分析（近100期）</div>
+            <div class="frequency-grid">
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">24</span>
+                    </div>
+                    <div class="ball-count">出现 29 次</div>
+                    <div class="ball-probability">29.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">30</span>
+                    </div>
+                    <div class="ball-count">出现 29 次</div>
+                    <div class="ball-probability">29.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">04</span>
+                    </div>
+                    <div class="ball-count">出现 25 次</div>
+                    <div class="ball-probability">25.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">14</span>
+                    </div>
+                    <div class="ball-count">出现 25 次</div>
+                    <div class="ball-probability">25.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">22</span>
+                    </div>
+                    <div class="ball-count">出现 23 次</div>
+                    <div class="ball-probability">23.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">25</span>
+                    </div>
+                    <div class="ball-count">出现 22 次</div>
+                    <div class="ball-probability">22.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">06</span>
+                    </div>
+                    <div class="ball-count">出现 20 次</div>
+                    <div class="ball-probability">20.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">13</span>
+                    </div>
+                    <div class="ball-count">出现 20 次</div>
+                    <div class="ball-probability">20.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">16</span>
+                    </div>
+                    <div class="ball-count">出现 20 次</div>
+                    <div class="ball-probability">20.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">01</span>
+                    </div>
+                    <div class="ball-count">出现 19 次</div>
+                    <div class="ball-probability">19.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">28</span>
+                    </div>
+                    <div class="ball-count">出现 19 次</div>
+                    <div class="ball-probability">19.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">29</span>
+                    </div>
+                    <div class="ball-count">出现 19 次</div>
+                    <div class="ball-probability">19.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">02</span>
+                    </div>
+                    <div class="ball-count">出现 18 次</div>
+                    <div class="ball-probability">18.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">05</span>
+                    </div>
+                    <div class="ball-count">出现 18 次</div>
+                    <div class="ball-probability">18.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">18</span>
+                    </div>
+                    <div class="ball-count">出现 18 次</div>
+                    <div class="ball-probability">18.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">27</span>
+                    </div>
+                    <div class="ball-count">出现 18 次</div>
+                    <div class="ball-probability">18.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">33</span>
+                    </div>
+                    <div class="ball-count">出现 18 次</div>
+                    <div class="ball-probability">18.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">09</span>
+                    </div>
+                    <div class="ball-count">出现 17 次</div>
+                    <div class="ball-probability">17.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">10</span>
+                    </div>
+                    <div class="ball-count">出现 17 次</div>
+                    <div class="ball-probability">17.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">11</span>
+                    </div>
+                    <div class="ball-count">出现 17 次</div>
+                    <div class="ball-probability">17.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">31</span>
+                    </div>
+                    <div class="ball-count">出现 17 次</div>
+                    <div class="ball-probability">17.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">15</span>
+                    </div>
+                    <div class="ball-count">出现 16 次</div>
+                    <div class="ball-probability">16.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">03</span>
+                    </div>
+                    <div class="ball-count">出现 15 次</div>
+                    <div class="ball-probability">15.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">07</span>
+                    </div>
+                    <div class="ball-count">出现 15 次</div>
+                    <div class="ball-probability">15.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">21</span>
+                    </div>
+                    <div class="ball-count">出现 15 次</div>
+                    <div class="ball-probability">15.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">12</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">17</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">19</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">20</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">23</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">26</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">32</span>
+                    </div>
+                    <div class="ball-count">出现 14 次</div>
+                    <div class="ball-probability">14.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="red-ball">08</span>
+                    </div>
+                    <div class="ball-count">出现 13 次</div>
+                    <div class="ball-probability">13.0%</div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- 蓝球概率统计 -->
+        <div class="section">
+            <div class="section-title">蓝球出现概率分析（近100期）</div>
+            <div class="frequency-grid">
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">04</span>
+                    </div>
+                    <div class="ball-count">出现 11 次</div>
+                    <div class="ball-probability">11.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">02</span>
+                    </div>
+                    <div class="ball-count">出现 10 次</div>
+                    <div class="ball-probability">10.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">05</span>
+                    </div>
+                    <div class="ball-count">出现 10 次</div>
+                    <div class="ball-probability">10.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">11</span>
+                    </div>
+                    <div class="ball-count">出现 9 次</div>
+                    <div class="ball-probability">9.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">01</span>
+                    </div>
+                    <div class="ball-count">出现 7 次</div>
+                    <div class="ball-probability">7.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">03</span>
+                    </div>
+                    <div class="ball-count">出现 7 次</div>
+                    <div class="ball-probability">7.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">12</span>
+                    </div>
+                    <div class="ball-count">出现 7 次</div>
+                    <div class="ball-probability">7.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">07</span>
+                    </div>
+                    <div class="ball-count">出现 6 次</div>
+                    <div class="ball-probability">6.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">15</span>
+                    </div>
+                    <div class="ball-count">出现 6 次</div>
+                    <div class="ball-probability">6.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">08</span>
+                    </div>
+                    <div class="ball-count">出现 5 次</div>
+                    <div class="ball-probability">5.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">09</span>
+                    </div>
+                    <div class="ball-count">出现 5 次</div>
+                    <div class="ball-probability">5.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">16</span>
+                    </div>
+                    <div class="ball-count">出现 5 次</div>
+                    <div class="ball-probability">5.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">06</span>
+                    </div>
+                    <div class="ball-count">出现 3 次</div>
+                    <div class="ball-probability">3.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">10</span>
+                    </div>
+                    <div class="ball-count">出现 3 次</div>
+                    <div class="ball-probability">3.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">13</span>
+                    </div>
+                    <div class="ball-count">出现 3 次</div>
+                    <div class="ball-probability">3.0%</div>
+                </div>
+
+                <div class="ball-item">
+                    <div class="ball-number">
+                        <span class="blue-ball">14</span>
+                    </div>
+                    <div class="ball-count">出现 3 次</div>
+                    <div class="ball-probability">3.0%</div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- 近50期开奖结果 -->
+        <div class="section">
+            <div class="section-title">近50期开奖结果</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>期次日期</th>
+                        <th>开奖球</th>
+                        <th>金额信息</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026132</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-17(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 402,998,740</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,215,899,380</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026131</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-15(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">15</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 438,881,432</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,214,985,444</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026130</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-12(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="blue-ball" style="margin-left: 8px;">02</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 415,319,170</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,157,243,790</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026129</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-10(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 409,899,552</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,134,076,885</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026128</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-08(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 442,016,354</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,174,385,127</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026127</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-05(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">32</span><span class="blue-ball" style="margin-left: 8px;">12</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 346,422,846</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,129,731,594</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026126</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-03(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">32</span><span class="blue-ball" style="margin-left: 8px;">12</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 342,910,496</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,074,322,050</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026125</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-11-01(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 374,042,920</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,044,117,721</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026124</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-29(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="blue-ball" style="margin-left: 8px;">09</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 346,568,144</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,075,698,427</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026123</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-27(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">12</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 334,118,378</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,079,246,630</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026122</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-25(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">09</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 364,308,228</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,056,837,777</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026121</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-22(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">02</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 336,574,558</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,056,741,122</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026120</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-20(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 332,731,798</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,035,363,275</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026119</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-18(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">04</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 364,378,528</div><div style="line-height: 1.5;"><strong>奖池:</strong> 1,025,112,736</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026118</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-15(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">14</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 340,890,776</div><div style="line-height: 1.5;"><strong>奖池:</strong> 958,655,708</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026117</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-13(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="blue-ball" style="margin-left: 8px;">04</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 332,237,260</div><div style="line-height: 1.5;"><strong>奖池:</strong> 931,629,281</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026116</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-11(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">12</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 363,128,812</div><div style="line-height: 1.5;"><strong>奖池:</strong> 936,031,217</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026115</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-08(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 337,573,290</div><div style="line-height: 1.5;"><strong>奖池:</strong> 909,402,631</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026114</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-10-06(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">10</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 339,993,172</div><div style="line-height: 1.5;"><strong>奖池:</strong> 941,868,611</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026113</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-29(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 338,536,676</div><div style="line-height: 1.5;"><strong>奖池:</strong> 973,407,364</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026112</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-27(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 351,384,920</div><div style="line-height: 1.5;"><strong>奖池:</strong> 972,650,894</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026111</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-24(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="red-ball" style="margin: 0 2px;">32</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 325,191,464</div><div style="line-height: 1.5;"><strong>奖池:</strong> 966,038,984</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026110</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-22(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">32</span><span class="blue-ball" style="margin-left: 8px;">14</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 327,624,764</div><div style="line-height: 1.5;"><strong>奖池:</strong> 930,967,826</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026109</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-20(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">06</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 359,008,756</div><div style="line-height: 1.5;"><strong>奖池:</strong> 936,353,465</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026108</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-17(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="blue-ball" style="margin-left: 8px;">16</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 335,294,274</div><div style="line-height: 1.5;"><strong>奖池:</strong> 917,243,647</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026107</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-15(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">04</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 328,194,638</div><div style="line-height: 1.5;"><strong>奖池:</strong> 858,528,126</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026106</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-13(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">14</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 361,568,656</div><div style="line-height: 1.5;"><strong>奖池:</strong> 856,497,196</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026105</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-10(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">08</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 333,874,688</div><div style="line-height: 1.5;"><strong>奖池:</strong> 833,007,469</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026104</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-08(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">19</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 333,116,798</div><div style="line-height: 1.5;"><strong>奖池:</strong> 798,557,035</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026103</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-06(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">15</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 362,416,068</div><div style="line-height: 1.5;"><strong>奖池:</strong> 805,259,723</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026102</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-03(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="blue-ball" style="margin-left: 8px;">09</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 335,960,988</div><div style="line-height: 1.5;"><strong>奖池:</strong> 782,244,968</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026101</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-09-01(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="blue-ball" style="margin-left: 8px;">12</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 329,493,946</div><div style="line-height: 1.5;"><strong>奖池:</strong> 766,096,090</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026100</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-30(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">03</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">04</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 357,107,230</div><div style="line-height: 1.5;"><strong>奖池:</strong> 743,395,010</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026099</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-27(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">02</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 344,486,222</div><div style="line-height: 1.5;"><strong>奖池:</strong> 776,452,438</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026098</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-25(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="blue-ball" style="margin-left: 8px;">07</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 337,464,770</div><div style="line-height: 1.5;"><strong>奖池:</strong> 711,169,786</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026097</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-23(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">29</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="blue-ball" style="margin-left: 8px;">02</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 369,897,178</div><div style="line-height: 1.5;"><strong>奖池:</strong> 710,238,057</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026096</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-20(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">26</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">04</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 344,932,190</div><div style="line-height: 1.5;"><strong>奖池:</strong> 654,135,395</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026095</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-18(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">16</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 347,737,104</div><div style="line-height: 1.5;"><strong>奖池:</strong> 628,888,733</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026094</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-16(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="blue-ball" style="margin-left: 8px;">01</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 373,881,722</div><div style="line-height: 1.5;"><strong>奖池:</strong> 616,242,219</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026093</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-13(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">08</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">21</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="blue-ball" style="margin-left: 8px;">09</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 348,046,564</div><div style="line-height: 1.5;"><strong>奖池:</strong> 566,415,284</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026092</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-11(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 339,633,672</div><div style="line-height: 1.5;"><strong>奖池:</strong> 571,623,532</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026091</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-09(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="red-ball" style="margin: 0 2px;">20</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 367,362,274</div><div style="line-height: 1.5;"><strong>奖池:</strong> 583,235,682</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026090</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-06(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 348,980,318</div><div style="line-height: 1.5;"><strong>奖池:</strong> 545,331,466</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026089</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-04(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">27</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 345,041,020</div><div style="line-height: 1.5;"><strong>奖池:</strong> 489,539,135</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026088</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-08-02(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">11</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">22</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 373,747,432</div><div style="line-height: 1.5;"><strong>奖池:</strong> 442,158,322</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026087</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-07-30(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">04</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">18</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">31</span><span class="blue-ball" style="margin-left: 8px;">11</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 349,545,040</div><div style="line-height: 1.5;"><strong>奖池:</strong> 473,791,046</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026086</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-07-28(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">02</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">25</span><span class="red-ball" style="margin: 0 2px;">30</span><span class="red-ball" style="margin: 0 2px;">32</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 345,608,568</div><div style="line-height: 1.5;"><strong>奖池:</strong> 463,257,269</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026085</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-07-26(日)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">09</span><span class="red-ball" style="margin: 0 2px;">13</span><span class="red-ball" style="margin: 0 2px;">17</span><span class="red-ball" style="margin: 0 2px;">24</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="blue-ball" style="margin-left: 8px;">15</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 368,292,652</div><div style="line-height: 1.5;"><strong>奖池:</strong> 450,096,595</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026084</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-07-23(四)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">01</span><span class="red-ball" style="margin: 0 2px;">05</span><span class="red-ball" style="margin: 0 2px;">06</span><span class="red-ball" style="margin: 0 2px;">10</span><span class="red-ball" style="margin: 0 2px;">12</span><span class="red-ball" style="margin: 0 2px;">16</span><span class="blue-ball" style="margin-left: 8px;">05</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 348,718,788</div><div style="line-height: 1.5;"><strong>奖池:</strong> 480,566,551</div></div></td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="期次日期"><div style="display: flex; flex-direction: column; gap: 6px; text-align: center;"><div style="line-height: 1.5; font-weight: 600; color: #667eea;">2026083</div><div style="line-height: 1.5; font-size: 0.9em; color: #666;">2026-07-21(二)</div></div></td>
+                        <td data-label="开奖球"><div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; word-break: break-word;"><span class="red-ball" style="margin: 0 2px;">07</span><span class="red-ball" style="margin: 0 2px;">14</span><span class="red-ball" style="margin: 0 2px;">15</span><span class="red-ball" style="margin: 0 2px;">23</span><span class="red-ball" style="margin: 0 2px;">28</span><span class="red-ball" style="margin: 0 2px;">33</span><span class="blue-ball" style="margin-left: 8px;">03</span></div></td>
+                        <td data-label="金额信息"><div style="display: flex; flex-direction: column; gap: 6px; text-align: left;"><div style="line-height: 1.5;"><strong>销售额:</strong> 348,240,258</div><div style="line-height: 1.5;"><strong>奖池:</strong> 480,802,779</div></div></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>本报告由 Python 自动生成 | 数据来源: www.22lp.com</p>
+        <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9em;">
+            温馨提示：理性购彩，量力而行
+        </p>
+    </div>
+</body>
+</html>
